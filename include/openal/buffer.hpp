@@ -7,9 +7,9 @@
 namespace al {
 
 namespace internal {
-    void gen_buffers(uint n, uint* buffers);
-	void delete_buffers(uint n, uint* buffers);
-	void buffer_data(uint buffer, uint format, void*data, uint size, uint freq);
+    inline void gen_buffers(uint n, uint* buffers);
+	inline void delete_buffers(uint n, uint* buffers);
+	inline void buffer_data(uint buffer, uint format, void*data, uint size, uint freq);
 }
 
 class buffer : public with_name {
@@ -61,3 +61,7 @@ public:
 };
 
 }
+
+#ifdef AL_INCLUDE
+#include "../../src/buffer.cpp"
+#endif

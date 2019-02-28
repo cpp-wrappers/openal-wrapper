@@ -1,22 +1,19 @@
-cxx=$CXX
-if [[ -z $cxx ]]; then
-    if clang++ --version >& /dev/null; then
-        cxx=clang++;
-    elif g++ --version >& /dev/null; then
-        cxx=g++;
-    fi
+if [[ -z $CXX ]]; then
+    echo you must specify CXX variable;
+    exit
 fi
-
-echo using $cxx
 
 cxxargs=\
 "-c \
 --std=c++17 \
--Iinclude/openal \
--o build/bridge.o \
-src/bridge.cpp"
+../src/internal.cpp \
+../src/device.cpp \
+../src/buffer.cpp \
+../src/source.cpp \
+-I../include/openal"
 
 cxxargs=$cxxargs $CXXARGS
 
 mkdir -p build
-$cxx $cxxargs
+cd build
+$CXX $cxxargs

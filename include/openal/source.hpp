@@ -6,16 +6,16 @@
 
 namespace al {
 namespace internal {
-    void gen_sources(uint n, uint* sources);
-    void delete_sources(uint n, uint* sources);
-    void source(uint source, uint pname, float value);
-    void source(uint source, uint pname, int value);
-    void get_source(uint source, uint pname, float* value);
-    void get_source(uint source, uint pname, int* value);
-	void source_queue_buffers(uint source, uint n, uint* buffers);
-	void source_unqueue_buffers(uint source, uint n, uint* buffers);
-    void source_play(uint source);
-    void source_stop(uint source);
+    inline void gen_sources(uint n, uint* sources);
+    inline void delete_sources(uint n, uint* sources);
+    inline void source(uint source, uint pname, float value);
+    inline void source(uint source, uint pname, int value);
+    inline void get_source(uint source, uint pname, float* value);
+    inline void get_source(uint source, uint pname, int* value);
+	inline void source_queue_buffers(uint source, uint n, uint* buffers);
+	inline void source_unqueue_buffers(uint source, uint n, uint* buffers);
+    inline void source_play(uint source);
+    inline void source_stop(uint source);
 }
 
 class source : public with_name {
@@ -110,3 +110,7 @@ public:
 };
 
 }
+
+#ifdef AL_INCLUDE
+#include "../../src/source.cpp"
+#endif

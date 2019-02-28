@@ -11,7 +11,7 @@ struct al_error : public std::runtime_error {
 };
 
 namespace internal {
-    uint get_error();
+    inline uint get_error();
 
     inline void check_for_error() {
         using namespace std;
@@ -24,3 +24,7 @@ namespace internal {
     }
 }
 }
+
+#ifdef AL_INCLUDE
+#include "../../src/internal.cpp"
+#endif

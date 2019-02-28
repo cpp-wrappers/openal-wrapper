@@ -5,10 +5,10 @@
 
 namespace alc {
 namespace internal {
-    void* open_device(const char* str);
-    void close_device(void* device_ptr);
-    void* create_context(void* device_ptr, int* attribs);
-    void make_context_current(void* context);
+    inline void* open_device(const char* str);
+    inline void close_device(void* device_ptr);
+    inline void* create_context(void* device_ptr, int* attribs);
+    inline void make_context_current(void* context);
 }
 
 class device;
@@ -41,3 +41,7 @@ inline void make_context_current(context& c) {
 }
 
 }
+
+#ifdef AL_INCLUDE
+#include "../../src/device.cpp"
+#endif
