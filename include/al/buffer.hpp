@@ -9,6 +9,7 @@ namespace al {
 namespace internal {
     inline void gen_buffers(uint n, uint* buffers);
 	inline void delete_buffers(uint n, uint* buffers);
+	inline void get_buffer(uint buffer, uint pname, int* value);
 	inline void buffer_data(uint buffer, uint format, void*data, uint size, uint freq);
 }
 
@@ -18,6 +19,20 @@ class buffer : public with_name {
 		internal::gen_buffers(1, &name);
 		AL_CHECK_FOR_ERROR_FN
 		return name;
+	}
+
+	enum class attrib {
+		frequency = 0x2001,
+		bits,
+		channels,
+		size
+	};
+
+	int get_attrib(attrib a) {
+		int i;
+		internal::get_buffer(name, (uint)a, &i);
+		AL_CHECK_FOR_ERROR_FN
+		return i;
 	}
     
 	inline void data(uint format, void* data, uint size, uint frequency) {
@@ -44,20 +59,41 @@ public:
 	}
 
 	template<class RAI>
-	void data(format fmt, RAI begin, unsigned size, unsigned frequency) {
-		data(static_cast<unsigned>(fmt), &*begin, size, frequency);
+	void data(format fmt, RAI begin, uint size, uint frequency) {
+		data((uint)fmt, &*begin, size, frequency);
 	}
 
 	template<class RAI>
-	void data(uint8_t channels, uint8_t bits, RAI begin, unsigned size, unsigned frequency) {
-		data(static_cast<al::buffer::format>
-			(0x1100 + (channels - 1) * 2 + bits / 8 - 1), begin, size, frequency);
+	void data(uint8_t channels, uint8_t bits, RAI begin, uint size, uint frequency) {
+		data(
+			static_cast<al::buffer::format>
+			(0x1100 + (channels - 1) * 2 + bits / 8 - 1),
+			begin,
+			size,
+			frequency
+		);
 	}
 
 	template<class Container>
-	void data(uint8_t channels, uint8_t bits, Container c, unsigned frequency) {
+	void data(format fmt, Container& c, uint frequency) {
+		data(
+			fmt
+			bits,
+			c.data(),
+			c.size()*sizeof(typename Container::value_type),
+			frequency
+		);
+	}
+
+	template<class Container>
+	void data(uint8_t channels, uint8_t bits, Container& c, uint frequency) {
 		data(channels, bits, c.begin(), c.size()*sizeof(typename Container::value_type), frequency);
 	}
+
+	uint get_frequency() { return get_attrib(attrib::frequency); }
+	uint get_bits() { return get_attrib(attrib::bits); }
+	uint get_channels() { return get_attrib(attrib::channels); }
+	uint get_size() { return get_attrib(attrib::size); }
 };
 
 }
