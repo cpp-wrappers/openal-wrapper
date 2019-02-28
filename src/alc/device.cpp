@@ -1,4 +1,4 @@
-#include "openal/device.hpp"
+#include "alc/device.hpp"
 #include "AL/alc.h"
 
 inline void* alc::internal::open_device(const char* str) {
@@ -15,4 +15,8 @@ inline void* alc::internal::create_context(void* device_ptr, int* attribs) {
 
 inline void alc::internal::make_context_current(void* context) {
     alcMakeContextCurrent((ALCcontext*)context);
+}
+
+inline uint alc::internal::get_error(void* device) {
+    return alcGetError((ALCdevice*)device);
 }

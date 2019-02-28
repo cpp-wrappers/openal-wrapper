@@ -26,5 +26,5 @@ namespace internal {
 }
 
 #ifdef AL_INCLUDE
-#include "../../src/internal.cpp"
+#include "../../al/src/internal.cpp"
 #endif

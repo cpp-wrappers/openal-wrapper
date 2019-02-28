@@ -1,4 +1,4 @@
-#include "openal/source.hpp"
+#include "al/source.hpp"
 #include "AL/al.h"
 
 inline void al::internal::gen_sources(uint n, uint* sources) {

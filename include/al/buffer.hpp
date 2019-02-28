@@ -1,8 +1,8 @@
 #pragma once
 
-#include "with_name.hpp"
+#include "al/with_name.hpp"
 #include <cstdint>
-#include "check_error_macro.hpp"
+#include "al/check_error_macro.hpp"
 
 namespace al {
 
@@ -63,5 +63,5 @@ public:
 }
 
 #ifdef AL_INCLUDE
-#include "../../src/buffer.cpp"
+#include "../../src/al/buffer.cpp"
 #endif

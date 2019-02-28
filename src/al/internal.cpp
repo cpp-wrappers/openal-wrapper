@@ -1,5 +1,5 @@
 #include "AL/al.h"
-#include "openal/internal.hpp"
+#include "al/internal.hpp"
 
 inline uint al::internal::get_error() {
     return alGetError();

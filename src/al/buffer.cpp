@@ -1,4 +1,4 @@
-#include "openal/buffer.hpp"
+#include "al/buffer.hpp"
 #include "AL/al.h"
 
 inline void al::internal::gen_buffers(uint n, uint* buffers) {

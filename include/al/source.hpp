@@ -1,8 +1,8 @@
 #pragma once
 
-#include "with_name.hpp"
-#include "check_error_macro.hpp"
-#include "buffer.hpp"
+#include "al/with_name.hpp"
+#include "al/check_error_macro.hpp"
+#include "al/buffer.hpp"
 
 namespace al {
 namespace internal {
@@ -112,5 +112,5 @@ public:
 }
 
 #ifdef AL_INCLUDE
-#include "../../src/source.cpp"
+#include "../../src/al/source.cpp"
 #endif
