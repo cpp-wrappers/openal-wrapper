@@ -77,8 +77,7 @@ public:
 	template<class Container>
 	void data(format fmt, Container& c, uint frequency) {
 		data(
-			fmt
-			bits,
+			fmt,
 			c.data(),
 			c.size()*sizeof(typename Container::value_type),
 			frequency

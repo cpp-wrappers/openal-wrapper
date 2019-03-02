@@ -24,3 +24,6 @@ cd build/alc
 $CXX \
 $cxxargs \
 ../../src/alc/device.cpp
+
+cd ..
+ar r  libopenal-wrapper.a al/internal.o al/buffer.o al/source.o alc/device.o
