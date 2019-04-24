@@ -26,4 +26,4 @@ $cxxargs \
 ../../src/alc/device.cpp
 
 cd ..
-ar r  libopenal-wrapper.a al/internal.o al/buffer.o al/source.o alc/device.o
+ar -rs libopenal-wrapper.a al/internal.o al/buffer.o al/source.o alc/device.o
