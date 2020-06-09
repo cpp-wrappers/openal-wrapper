@@ -4,10 +4,12 @@
 #include <string>
 #include <sstream>
 
+using uint = unsigned;
+
 namespace al {
 
-struct al_error : public std::runtime_error {
-    al_error(std::string what) : std::runtime_error(what) {}
+struct error : public std::runtime_error {
+    error(std::string what) : std::runtime_error(what) {}
 };
 
 namespace internal {
@@ -19,7 +21,7 @@ namespace internal {
         if(error) {
             ostringstream what;
             what << hex << showbase << uppercase << error;
-            throw al_error(what.str());
+            throw al::error(what.str());
         }
     }
 }

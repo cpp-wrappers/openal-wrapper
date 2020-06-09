@@ -1,16 +1,16 @@
 #pragma once
 
 #include "al/with_name.hpp"
-#include <cstdint>
+#include <stdint.h>
 #include "al/check_error_macro.hpp"
 
 namespace al {
 
 namespace internal {
-    inline void gen_buffers(uint n, uint* buffers);
-	inline void delete_buffers(uint n, uint* buffers);
-	inline void get_buffer(uint buffer, uint pname, int* value);
-	inline void buffer_data(uint buffer, uint format, void*data, uint size, uint freq);
+    void gen_buffers(uint n, uint* buffers);
+	void delete_buffers(uint n, uint* buffers);
+	void get_buffer(uint buffer, uint pname, int* value);
+	void buffer_data(uint buffer, uint format, void*data, uint size, uint freq);
 }
 
 class buffer : public with_name {
@@ -35,7 +35,7 @@ class buffer : public with_name {
 		return i;
 	}
     
-	inline void data(uint format, void* data, uint size, uint frequency) {
+	void data(uint format, void* data, uint size, uint frequency) {
 		internal::buffer_data(name, format, data, size, frequency);
 		AL_CHECK_FOR_ERROR_FN
 	}
@@ -96,7 +96,3 @@ public:
 };
 
 }
-
-#ifdef AL_INCLUDE
-#include "../../src/al/buffer.cpp"
-#endif

@@ -6,16 +6,16 @@
 
 namespace al {
 namespace internal {
-    inline void gen_sources(uint n, uint* sources);
-    inline void delete_sources(uint n, uint* sources);
-    inline void source(uint source, uint pname, float value);
-    inline void source(uint source, uint pname, int value);
-    inline void get_source(uint source, uint pname, float* value);
-    inline void get_source(uint source, uint pname, int* value);
-	inline void source_queue_buffers(uint source, uint n, uint* buffers);
-	inline void source_unqueue_buffers(uint source, uint n, uint* buffers);
-    inline void source_play(uint source);
-    inline void source_stop(uint source);
+    void gen_sources(uint n, uint* sources);
+    void delete_sources(uint n, uint* sources);
+    void source(uint source, uint pname, float value);
+    void source(uint source, uint pname, int value);
+    void get_source(uint source, uint pname, float* value);
+    void get_source(uint source, uint pname, int* value);
+	void source_queue_buffers(uint source, uint n, uint* buffers);
+	void source_unqueue_buffers(uint source, uint n, uint* buffers);
+    void source_play(uint source);
+    void source_stop(uint source);
 }
 
 class source : public with_name {
@@ -37,11 +37,11 @@ class source : public with_name {
         return name;
 	}
 
-	inline void i(param_name param, int value) {
+	void i(param_name param, int value) {
 		internal::source(name, (uint)param, value);
 		AL_CHECK_FOR_ERROR_FN
 	}
-    inline int get_i(param_name param) {
+    int get_i(param_name param) {
         int v;
 		internal::get_source(name, (uint)param, &v);
 		AL_CHECK_FOR_ERROR_FN
@@ -75,7 +75,7 @@ public:
         );
 	}
 
-	inline void queue_buffer(al::buffer& buff) {
+	void queue_buffer(al::buffer& buff) {
 		internal::source_queue_buffers(name, 1, &buff.name);
 		AL_CHECK_FOR_ERROR_FN
 	}
@@ -85,23 +85,23 @@ public:
 		AL_CHECK_FOR_ERROR_FN
 	}
 
-	inline state get_state() {
+	state get_state() {
 		return (state) get_i(param_name::source_state);
 	}
 
-	inline bool stopped() {
+	bool stopped() {
 		return get_state() == state::stopped;
 	}
 
-    inline bool playing() {
+    bool playing() {
         return get_state() == state::playing;
     }
 
-	inline unsigned get_buffers_processed() {
+	unsigned get_buffers_processed() {
 		return get_i(param_name::buffers_processed);
 	}
 
-	inline unsigned get_buffers_queued() {
+	unsigned get_buffers_queued() {
 		return get_i(param_name::buffers_queued);
 	}
 
@@ -110,7 +110,3 @@ public:
 };
 
 }
-
-#ifdef AL_INCLUDE
-#include "../../src/al/source.cpp"
-#endif

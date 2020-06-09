@@ -5,13 +5,15 @@
 #include <stdexcept>
 #include <sstream>
 
+using uint = unsigned;
+
 namespace alc {
 namespace internal {
-    inline void* open_device(const char* str);
-    inline void close_device(void* device_ptr);
-    inline void* create_context(void* device_ptr, int* attribs);
-    inline void make_context_current(void* context);
-    inline uint get_error(void* device);
+    void* open_device(const char* str);
+    void close_device(void* device_ptr);
+    void* create_context(void* device_ptr, int* attribs);
+    void make_context_current(void* context);
+    uint get_error(void* device);
 }
 
 class device;
@@ -68,7 +70,3 @@ inline void make_context_current(context& c) {
 }
 
 }
-
-#ifdef AL_INCLUDE
-#include "../../src/alc/device.cpp"
-#endif
